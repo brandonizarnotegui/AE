@@ -1,0 +1,23 @@
+
+definition of subsequence:
+a subsequence is a sequence that can be derived from another sequence 
+by deleting some elements without changing the order of the remaining elements 
+-a sequence can be exactly the same as the subsequence
+
+
+initial pseudocode 
+-------------------
+traverse 
+[
+-is cur_index contained in set 	
+-is current_index ensuring order of elements remained the same 
+]
+
+final actual pseudocode
+-------------------------        
+
+//traverse
+//ensure order of elements remain the same
+//is cur_element contained in set
+
+

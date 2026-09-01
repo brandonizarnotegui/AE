@@ -1,0 +1,134 @@
+import java.util.*;
+
+
+
+class HelloWorld {
+
+
+	public static void main(String[] args) {
+
+		/* 
+		//to memory 
+		ArrayList <Integer> set = new ArrayList <Integer>();
+		set.add(1);
+		set.add(2);
+		//set.add(3);
+
+		ArrayList <Integer> subset = new ArrayList <Integer>();
+		subset.add(1);
+		subset.add(2);
+		subset.add(3);
+	*/
+
+	
+		ArrayList <Integer> set = new ArrayList <Integer>();
+		set.add(5);
+		set.add(1);
+		set.add(22);
+		set.add(25);
+		set.add(6);
+		set.add(-1);
+		set.add(8);
+		set.add(10);
+	
+		ArrayList <Integer> subset = new ArrayList <Integer>();
+		subset.add(1);
+		subset.add(6);
+		subset.add(-1);
+		subset.add(5);
+
+	
+
+		
+
+		boolean answer = isValidSubsequence(set, subset);
+		System.out.println(answer);
+
+
+
+	}
+
+	//note sequence == subset , array == set 
+	public static boolean isValidSubsequence(List<Integer> array, List<Integer> sequence){
+		
+
+		List <Integer> range = new ArrayList <Integer> ();
+			
+		//traverse subset
+		for (int i = 0 ; i < sequence.size(); i++){
+	
+			int cur_sequence_el_index = sequence.get(i);
+
+			//aware of order range 
+			range = array.subList(i, array.size());
+			if(range.contains(cur_sequence_el_index)){
+
+			}else{
+				return false;
+			}
+
+
+			if (array.contains(cur_sequence_el_index)){
+				//System.out.println("set contains " + cur_sequence_el_index);
+
+			}else{
+				//System.out.println("go break , the it does not contain this el");
+				return false;
+			}
+		}
+
+
+		//each element must be repeated same amount of times in both arrays 
+		HashMap <Integer, Integer> array_el_ocurrences = new HashMap<Integer,Integer>();
+		HashMap <Integer, Integer> seq_el_ocurrences = new HashMap<Integer,Integer>();
+		array_el_ocurrences = init_map(array_el_ocurrences, array);
+		seq_el_ocurrences = init_map(seq_el_ocurrences, sequence);
+		populate_map_values(seq_el_ocurrences, sequence);
+		populate_map_values(array_el_ocurrences, array);
+
+		System.out.println(array_el_ocurrences+ "  " +seq_el_ocurrences);
+		
+		int loops = 0 ; 
+		if (sequence.size() < array.size() || sequence.size() == array.size()){
+			loops = sequence.size();
+		}
+		if (array.size() < sequence.size()){
+			loops = array.size();
+		}
+
+		for (int i = 0 ; i < loops ; i++){ 
+			System.out.print(sequence.get(i)+ "  ");
+
+			if (seq_el_ocurrences.get(sequence.get(i)) == array_el_ocurrences.get(sequence.get(i))
+			|| seq_el_ocurrences.get(sequence.get(i)) < array_el_ocurrences.get(sequence.get(i))){
+				System.out.println("same amount of ocurrences");
+			}else{
+				System.out.println("false");
+				return false;
+			}	
+		}
+		//end of check num of ocurrences  
+
+		return true;
+
+	}
+
+    public static HashMap<Integer, Integer> init_map (HashMap<Integer, Integer> myMap,List<Integer> array){
+        for (int i = 0 ; i < array.size() ; i++){
+            myMap.put(array.get(i),0);
+        }
+        return myMap;
+    }
+
+	public static void populate_map_values (HashMap<Integer, Integer> myMap,List<Integer> array){
+        for (int i = 0 ; i < array.size() ; i++){
+			int cur_sequence_el_index = array.get(i);
+			int value = ( myMap.get(cur_sequence_el_index) ) +1;
+            myMap.put(cur_sequence_el_index, value);
+        }
+    }
+
+
+
+
+}

@@ -1,0 +1,92 @@
+import java.util.*;
+
+
+class HelloWorld {
+
+
+    public static void main(String[] args) {
+
+        
+        //to memory 
+        ArrayList <Integer> set = new ArrayList <Integer>();
+        set.add(1);
+        set.add(2);
+        set.add(2);
+        set.add(4);
+
+        ArrayList <Integer> subset = new ArrayList <Integer>();
+        subset.add(1);
+        subset.add(2);
+    
+        
+    
+
+    
+
+        //"array": [5, 1, 22, 25, 6, -1, 8, 10],
+        //"sequence": [5, 1, 25, 22, 6, -1, 8, 10]  expected false 
+        
+        /* 
+        ArrayList <Integer> set = new ArrayList <Integer>();
+        set.add(5);
+        set.add(1);
+        set.add(22);
+        set.add(25);
+        set.add(6);
+        set.add(-1);   
+        set.add(8);
+        set.add(10);
+    
+        ArrayList <Integer> subset = new ArrayList <Integer>();
+        subset.add(5);
+        subset.add(1);
+        subset.add(25);
+        subset.add(22);
+        subset.add(6);
+        subset.add(-1);   
+        subset.add(8);
+        subset.add(10);
+        */
+    
+
+        boolean answer = isValidSubsequence(set, subset);
+        System.out.println(answer);
+
+
+
+    }
+
+
+
+	//note sequence == subset , array == set 
+	public static boolean isValidSubsequence(List<Integer> array, List<Integer> sequence){
+	
+
+		List <Integer> range = new ArrayList <Integer> ();
+			
+		//traverse subset
+		for (int i = 0 ; i < sequence.size(); i++){
+			
+			int cur_sequence_el_index = sequence.get(i);
+			range = array.subList(i, array.size()); //added for especial case 24
+			System.out.println("is " + cur_sequence_el_index + " inside set?");
+			
+			System.out.println("set   " + range+ "\nsubset" + sequence);
+			if(range.contains(cur_sequence_el_index)){
+				System.out.println("true, remove:" + cur_sequence_el_index + " from subset");
+				array.set(array.indexOf(cur_sequence_el_index), null);
+			}else{
+				return false;
+			}
+
+			System.out.println("");
+		}
+
+
+		return true;
+
+	}
+   
+
+
+}

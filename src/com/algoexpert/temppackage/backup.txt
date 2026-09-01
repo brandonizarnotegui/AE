@@ -1,0 +1,86 @@
+package com.algoexpert.temppackage;
+
+public class Temp2 {
+
+	public static void main(String[] args) {
+		
+		//test case1 expects 28,26 gets  
+		int[] arrayOne = { -1, 5, 10, 20, 28, 3 };
+		int[] arrayTwo = { 26, 134, 135, 15, 17 };
+		
+		
+		/*
+			//test case 2  expects 20,17 but gets 20,26
+			int[] arrayOne = { -1, 5, 10, 20, 3 };
+			int[] arrayTwo = { 26, 134, 135, 15, 17 };
+			*/	  
+				  
+		int[] arr = smallestDifference(arrayOne, arrayTwo);
+		//System.out.println( "|" + arr[1] + "-" + arr[2] + "|  = " +  arr[0]);
+
+	}
+
+	
+	//this works for the inner array 
+	public static int[] smallestDifference(int[] arrayOne, int[] arrayTwo) {
+
+		//
+		int[] els_of_smallest_inner_calculation = new int[3];
+		int[] els_of_smallest_outer_calculation = new int[3];
+		int prev_calculation = Integer.MAX_VALUE;
+		//
+		int prev_inner_smallest_calc = Integer.MAX_VALUE;
+		int smallest_calculation_of_all = Integer.MAX_VALUE;
+		
+		
+		//for (int j = 0 ; j < arrayOne.length ; j++) {
+		
+			for (int i = 0; i < arrayTwo.length; i++) {  //start inner
+			//debug:work with 20 --> arrayOne[3]
+				int calculation = Math.abs( Math.abs(arrayTwo[i])- Math.abs(arrayOne[0]));
+				System.out.println("calculation: " + calculation + "\t" + "prev_calculation: " + prev_calculation);
+				if (calculation < prev_calculation) {
+					//store all elements of what is the smallest calculation 
+					System.out.println("slst inner: " + els_of_smallest_inner_calculation [0] + " = " +Math.abs(els_of_smallest_inner_calculation [1]) + " - " + Math.abs(els_of_smallest_inner_calculation [2]));
+					els_of_smallest_inner_calculation [0]  =  calculation; 
+					els_of_smallest_inner_calculation [2]  =  arrayTwo[i]; 
+					els_of_smallest_inner_calculation [1]  =  arrayOne[0]; 
+				}
+				
+				prev_calculation = calculation;
+			
+				
+			}//end of inner 		
+			System.out.println();
+	/*		
+			int cur_inner_smallest_calc =  els_of_smallest_inner_calculation [0];
+			
+			if (cur_inner_smallest_calc < prev_inner_smallest_calc) {
+				smallest_calculation_of_all = cur_inner_smallest_calc;
+				System.out.println("slst outer: " + els_of_smallest_outer_calculation [0] + " = " +els_of_smallest_outer_calculation [1] + " - " + els_of_smallest_outer_calculation [2]);
+				els_of_smallest_outer_calculation [0]  =  smallest_calculation_of_all; 
+				els_of_smallest_outer_calculation [2]  =  els_of_smallest_inner_calculation [2]; 
+				els_of_smallest_outer_calculation [1]  =  els_of_smallest_inner_calculation [1]; 
+			}
+			
+			prev_inner_smallest_calc = cur_inner_smallest_calc;
+		*/
+		//}//end of outer 
+		
+		
+		
+		System.out.println(els_of_smallest_outer_calculation [2]+ "," + els_of_smallest_outer_calculation [1]);
+		System.out.println(smallest_calculation_of_all);
+		
+		
+		
+		/*
+		int [] ans_arr =  new int[2]; 
+		ans_arr[0] = els_of_smallest_calculation[2];
+		ans_arr[1] = els_of_smallest_calculation[1];
+		System.out.println("answer for the ae: " + ans_arr[0] + "  " + ans_arr[1] );
+		*/
+		return els_of_smallest_outer_calculation;
+	}
+
+}
